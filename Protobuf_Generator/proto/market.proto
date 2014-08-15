@@ -1,0 +1,77 @@
+package com.udows.stg.proto;
+option java_outer_classname = "MAppMarket";
+
+message MMarketType {
+	optional string id = 1; //id
+	optional string name = 2; //名称
+	optional string img = 3; //图
+}
+
+message MMarketTypeList {
+	repeated MMarketType list = 1; //列表
+}
+
+message MMarketGoods {
+	optional string id = 1; //id
+	optional string name = 2; //名称
+	optional string img = 3; //图
+	optional string price = 4; //价格
+}
+
+message MMarketGoodsList {
+	repeated MMarketGoods list = 1; //列表
+}
+
+message MMarketAct {
+	optional string id = 1; //id
+	optional string title = 2; //名称
+	optional string img = 3; //图
+	optional string time = 4; //时间
+	optional string url = 5; //详情
+}
+
+message MMarketActList {
+	repeated MMarketAct list = 1; //列表
+}
+
+message MMarket {
+	optional string id = 1; //id
+	optional string title = 2; //名称
+	optional string distance = 3; //距离
+}
+
+message MMarketList {
+	repeated MMarket list = 1; //列表
+}
+
+/**
+@api MMarketTypeList MMarketTypeList	//超市分类列表(需要登录)
+@param required string code //城市编号
+@return MMarketTypeList
+*/
+
+/**
+@api MMarketList MMarketList	//超市列表(需要登录,分页)
+@param required string code //城市编号
+@param optional string typeId //超市分类
+@return MMarketList
+*/
+
+/**
+@api MMarketCates MMarketCates	//超市内分类(需要登录)
+@param required string id //超市id
+@return MMarketTypeList
+*/
+
+/**
+@api MMarketIndexGoods MMarketIndexGoods	//超市商品列表(需要登录,分页)
+@param required string id //超市id
+@param optional string cateId //超市商品分类(无则为首页商品)
+@return MMarketGoodsList
+*/
+
+/**
+@api MMarketActList MMarketActList	//超市活动列表(需要登录)
+@param required string id //超市id
+@return MMarketActList
+*/

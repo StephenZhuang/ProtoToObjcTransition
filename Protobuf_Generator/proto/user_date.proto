@@ -1,0 +1,190 @@
+package com.udows.stg.proto;
+option java_outer_classname = "MUserDate";
+
+message MDate {
+	optional string id = 1; //id
+	optional string theme = 2; //主题
+	optional string content = 3; //内容
+	optional string img = 4; //照片
+	optional string time = 5; //邀约时间
+	optional string place = 6; //地点
+	optional string cost = 7; //费用
+	optional int32 friend = 8; //带朋友 0:否 1:是
+	optional string userid = 9; //用户id
+	optional string userImg = 10; //用户头像
+	optional string nickname = 11; //用户昵称
+	optional string sex = 12; //性别
+	optional int32 age = 13; //年龄
+	optional string distanceShow = 14; //距离(显示用)
+	optional string distanceQuery = 15; //距离(分页用)
+	optional string createTimeShow = 16; //创建时间(显示用)
+	optional string createTimeQuery = 17; //创建时间(分页用)
+	optional int32 hasView = 18; //是否已经聊过0:否 1:是
+	optional int32 userCnt = 19; //参与人数
+	optional int32 overdue = 20; //是否过期 0:否 1:是
+	optional string status = 21; //状态
+	optional string viewId = 22; //会话id(若已经聊过)
+}
+
+message MDateList {
+	repeated MDate date = 1; //列表
+}
+
+message MMarriage {
+	optional string id = 1; //id
+	optional string userid = 2; //用户id
+	optional string img = 3; //照片
+	optional string letter = 4; //寄语
+	optional string whenMarry = 5; //何时结婚
+	optional string parent = 6; //双亲健在
+	optional string onlyChild = 7; //独生子女
+	optional string source = 8; //户籍地
+	optional string location = 9; //现居地(user表)
+	optional string height = 10; //身高(user表)
+	optional string weight = 11; //体重(user表)
+	optional string job = 12; //职业(user表)
+	optional string income = 13; //月收入(user表)
+	optional string education = 14; //学历(user表)
+	optional string history = 15; //恋爱史
+	optional string marriageHistory = 16; //婚史
+	optional string child = 17; //有无子女
+	optional string wine = 18; //饮酒
+	optional string health = 19; //健康
+	optional string marriageHousing = 20; //婚后住房
+	optional string zodiac = 21; //属相
+	optional string constellation = 22; //星座
+	optional string blood = 23; //血型
+	optional string nation = 24; //民族
+	optional string religion = 25; //宗教信仰
+	optional string school = 26; //学校和专业
+	optional string driverLicense = 27; //驾照
+	optional string smoke = 28; //抽烟
+	optional string trait = 29; //性格
+	optional string disease = 30; //遗传病史
+	optional string sport = 31; //运动
+	optional string travel = 32; //旅行
+	optional string hobby = 33; //爱好
+	optional string houseEquity = 34; //房产总值
+	optional string loan = 35; //尚余贷款比
+	optional string car = 36; //车辆(user表)
+	optional string asset = 37; //其它资产
+	optional string targetSource = 38; //对象户籍
+	optional string targetIncome = 39; //对象收入
+	optional string targetEducation = 40; //对象学历
+	optional string targetMarriage = 41; //对象婚史
+	optional string targetHouse = 42; //对象住房
+	optional string targetChild = 43; //对象子女
+	optional string targetZodiac = 44; //对象属相
+	optional string targetHeight = 45; //对象身高
+	optional string targetWeight = 46; //对象体重
+	optional string distance = 47; //用户距离
+	optional string nickname = 48; //用户昵称
+	optional int32 sex = 49; //用户性别
+	optional int32 age = 50; //用户年龄
+	optional int32 photoCnt = 51; //用户照片数量
+	optional string createTime = 52; //创建时间
+	optional int32 hasView = 53; //是否已经聊过0:否 1:是
+	optional string viewId = 54; //会话id(若已经聊过)
+}
+
+message MMarriageMini {
+	optional string id = 1; //id
+	optional string userid = 2; //用户id
+	optional string userImg = 3; //用户头像
+	optional string nickname = 4; //用户昵称
+	optional int32 sex = 5; //性别
+	optional int32 age = 6; //年龄
+	optional string height = 7; //身高
+	optional string weight = 8; //体重
+	optional string job = 9; //职业
+	optional string letter = 10; //寄语(征婚表)
+	optional string img = 11; //照片(征婚表)
+	optional string createTimeShow = 12; //创建时间(显示用)
+	optional string createTimeQuery = 13; //创建时间(分页用)
+	optional string distanceShow = 14; //距离(显示用)
+	optional string distanceQuery = 15; //距离(分页用)
+	optional int32 userCnt = 16; //参与人数
+	optional string status = 17; //状态
+}
+
+message MMarriageMiniList {
+	optional MMarriageMini list = 1; //列表
+}
+
+message MUserDatePage {
+	repeated MMarriageMini marriage = 1; //征婚
+	repeated MDate date = 2; //邀约
+}
+
+/**
+@api MAddDate MAddDate	//发布邀约(需要登录)
+@param required string theme //主题
+@param required string content //内容
+@param optional string img //图片
+@param required string time //时间
+@param required string place //地点
+@param required number friend //带朋友 0:否 1:是
+@param required string cost //费用
+@return MRet
+*/
+
+/**
+@api MDelDate MDelDate	//删除邀约(需要登录)
+@param required string id //ID
+@return MRet
+*/
+
+/**
+@api MDateDetail MDateDetail	//邀约详情(需要登录)
+@param required string id //ID
+@return MDate
+*/
+
+/**
+@api MDateList MDateList	//邀约列表(需要登录,分页)
+@param optional string theme //主题,模糊查询
+@param required number sortOrder //排序1:时间 2:距离
+@param optional string sortValue //对应的值
+@param required number sex //性别0:女1:男 2:all
+@param optional string city //城市,模糊查询
+@param required number isVerify //已认证  0:all 1:是 
+@return MDateList
+*/
+
+/**
+@api MMarriageList MMarriageList	//征婚列表(需要登录,分页)
+@param required number sortOrder //排序1:时间 2:距离
+@param optional string sortValue //对应的值
+@param required number sex //性别0:女1:男 2:all
+@param optional string city //城市,模糊查询
+@param required number isVerify //已认证  0:all 1:是 
+@return MMarriageMiniList
+*/
+
+/**
+@api MUserMarriage MUserMarriage	//征婚信息(需要登录)
+@param required string id //用户id
+@return MMarriage
+*/
+
+/**
+@api MEditMarriage MEditMarriage	//编辑征婚信息(需要登录)
+@param required MMarriage info //征婚信息
+@return MRet
+*/
+
+/**
+@api MDelMarriage MDelMarriage	//删除征婚信息(需要登录)
+@return MRet
+*/
+
+/**
+@api MUserDatePage MUserDatePage	//个人主页-个人邀约(需要登录)
+@param required string id //用户id
+@return MUserDatePage
+*/
+
+/**
+@api MMyDate MMyDate	//个人邀约-我的参与(需要登录,分页)
+@return MUserDatePage
+*/

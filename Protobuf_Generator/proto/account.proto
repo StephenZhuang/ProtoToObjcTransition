@@ -1,0 +1,113 @@
+package com.udows.stg.proto;
+option java_outer_classname = "MUserAccount";
+
+message MAccount {
+	optional string id = 1;	   //id
+	optional string verify = 2;  //登陆校验码
+	optional int32 type = 3;  //账号类型 1:系统 2:第三方
+	optional int32 inited = 4;  //是否已经初始化账号 0:否 1:是
+}
+
+message MMe {
+	optional string id = 1;	   //id
+	optional string account = 2;  //账号
+	optional int32 sex = 3;  //性别 1:男 0:女
+	optional string nickname = 4;  //昵称
+	optional int32 credits = 5;  //积分
+	optional string stb = 6;  //搜淘币
+	optional int32 isVerify = 7;  //已认证 1:是 0:否
+	optional string location = 8;  //所在地
+}
+
+/**
+@api MLogin MLogin	//登录  /mobile?methodno=MLogin&debug=1&deviceid=test&phone=&password=&device=
+@param required string phone //手机号
+@param required string password //密码(需要加密)
+@param required string device //设备类型  android或ios
+@return MAccount
+*/
+
+/**
+@api MOauthLogin MOauthLogin	//第三方登录 /mobile?methodno=MOauthLogin&debug=1&deviceid=test&type=&openid=&accessToken=&device=
+@param required string type //1:qq 2:sina 3:weixin
+@param required string openid //openid
+@param required string accessToken //accessToken
+@param required string device //设备类型  android或ios
+@return MAccount
+*/
+
+/**
+@api MGetMobileMsg MGetMobileMsg	//获取验证码 /mobile?methodno=MGetMobileMsg&debug=1&deviceid=test&phone=&type=
+@param required string phone //手机号
+@param required number type //1:注册 2:忘记密码 
+@return MRet
+*/
+
+/**
+@api MCheckMobileMsg MCheckMobileMsg	//验证验证码 /mobile?methodno=MCheckMobileMsg&debug=1&deviceid=test&phone=&code=
+@param required string phone //手机号
+@param required number code //验证码
+@return MRet
+*/
+
+/**
+@api MRegist MRegist	//注册  /mobile?methodno=MRegist&debug=1&deviceid=test&phone=&code=&password=&device=
+@param required string phone //手机号
+@param required string code //短信验证码
+@param required string password //密码(需要加密)
+@param required string device //设备类型  android或ios
+@return MAccount
+*/
+
+/**
+@api MUpdateBaseInfo MUpdateBaseInfo	//完善资料(需要登录) /mobile?methodno=MUpdateBaseInfo&debug=1&userid=1&verify=1&deviceid=test&nickname=&sex=&headImg=&location=&birthday=&age=
+@param required string nickname //昵称
+@param required number sex //性别  0:女 1:男
+@param required string headImg //头像ID
+@param required string location //所在地
+@param required string birthday //生日
+@param required number age //年龄
+@return MRet
+*/
+
+/**
+@api MForgetPassword MForgetPassword	//忘记密码 /mobile?methodno=MForgetPassword&debug=1&deviceid=test&phone=&code=&password=&device=
+@param required string phone //手机号
+@param required string code //短信验证码
+@param required string password //新密码(需要加密)
+@param required string device //设备类型  android或ios
+@return MAccount
+*/
+
+/**
+@api MChangePassword MChangePassword	//修改密码(需要登录)/mobile?methodno=MChangePassword&debug=1&userid=1&verify=1&deviceid=test&oldPwd=&newPwd=
+@param required string oldPwd //旧密码(需要加密)
+@param required string newPwd //新密码(需要加密)
+@return MRet
+*/
+
+/**
+@api MUpdateCoord MUpdateCoord	//开启应用上报坐标(需要登录)  /mobile?methodno=MUpdateCoord&debug=1&userid=1&verify=1&deviceid=test&lat=&lng=
+@param required string lat //纬度
+@param required string lng //经度
+@return MRet
+*/
+
+/**
+@api MGetBaseInfo MGetBaseInfo	//获取用户基本信息(需要登录) /mobile?methodno=MGetBaseInfo&debug=1&deviceid=test&userid=&verify=
+@return MMe
+*/
+
+/**
+@api MLogout MLogout	//注销清除推送信息(需要登录)/mobile?methodno=MLogout&debug=1&deviceid=test&userid=&verify=
+@return MRet
+*/
+
+/**
+@api MBindPhone MBindPhone	//绑定手机(需要登录) /mobile?methodno=MBindPhone&debug=1&deviceid=test&userid=&verify=&phone=&code=
+@param required string phone //手机号
+@param required string code //短信验证码
+@return MRet
+*/
+
+

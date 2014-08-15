@@ -1,0 +1,123 @@
+package com.udows.stg.proto;
+option java_outer_classname = "MTuanGou";
+
+message MTgRecommend {
+	optional string id = 1; //id
+	optional string img = 2; //图
+}
+
+message MTgRecommendList {
+	repeated MTgRecommend list = 1; //列表
+}
+
+message MTgMini {
+	optional string id = 1; //id
+	optional string img = 2; //图
+	optional string name = 3; //名称
+	optional string distance = 4; //距离
+	optional string info = 5; //描述（[商圈]+简介）
+	optional string oldPrice = 6; //原价
+	optional string nowPrice = 7; //现价
+	optional string commentCnt = 8; //评论数
+	optional string avg = 9; //均分
+	optional int32 type = 10; //1:一元支付 2:全额支付
+}
+
+message MTgMiniList {
+	repeated MTgMini list = 1; //列表
+}
+
+message MTgDetail {
+	optional string id = 1; //id
+	optional string imgs = 2; //组图
+	optional string name = 3; //名称
+	optional string info = 4; //描述
+	optional string oldPrice = 5; //原价
+	optional string nowPrice = 6; //现价
+	optional int32 commentCnt = 7; //评论数
+	optional string avg = 8; //均分
+	optional int32 type = 9; //1:一元支付 2:全额支付
+	optional int32 sellCnt = 10; //售出量
+	optional string storeName = 11; //商家名称
+	optional string storeAddress = 12; //商家地址
+	optional string distance = 13; //距离
+	optional string phone = 14; //电话
+	optional string storeId = 15; //商家id
+	optional string combo = 16; //套餐
+	optional string detailUrl = 17; //图文详情webview
+	optional string msg = 18; //购买须知
+	repeated MGoodsComment comments = 20; //评论列表(前3个)
+	repeated MTgMini related = 21; //相关团购(同商圈下同类团购最多10个)
+	repeated MTgMini recommend = 22; //用户还看了(同商圈下团购4个)
+	repeated MPayment payment = 23; //付款项
+}
+
+message MPayment {
+	optional string id = 1; //id
+	optional string stb = 2; //x元搜淘币
+	optional string backPrice = 3; //返利
+	optional string price = 4; //到店支付
+	optional string credits = 5; //反积分
+}
+
+message MGoodsComment {
+	optional string id = 1; //id
+	optional string imgs = 2; //组图
+	optional string userid = 3; //用户id
+	optional string info = 4; //描述
+	optional int32 stars = 5; //总评
+	optional string nickname = 6; //用户昵称
+	optional string time = 7; //时间
+	optional string reply = 8; //商家回复
+	optional int32 anonymity = 9; //是否匿名
+}
+
+message MGoodsCommentList {
+	repeated MGoodsComment list = 1; //列表
+	optional int32 stars1 = 2; //一星
+	optional int32 stars2 = 3; //二星
+	optional int32 stars3 = 4; //三星
+	optional int32 stars4 = 5; //四星
+	optional int32 stars5 = 6; //五星
+	optional int32 commentCnt = 7; //评论数
+	optional string avg = 8; //均分
+}
+
+/**
+@api MTgRecommend MTgRecommend	//团购-首页推荐(需要登录)
+@param required string cityCode //城市编号
+@return MTgRecommendList
+*/
+
+/**
+@api MTgList MTgList	//团购列表(需要登录,分页)
+@param required string areaCode //区域编号(全城则为城市编号)
+@param optional string keyword //关键字
+@param optional string cateCode //主营编号(new:新单)
+@param required number sortType //排序 1:
+@return MTgMiniList
+*/
+
+/**
+@api MTgIndexList MTgIndexList	//团购首页列表(需要登录)
+@param required string cityCode //城市编号
+@return MTgMiniList
+*/
+
+/**
+@api MTgDetail MTgDetail	//团购详情(需要登录)
+@param required string id //id
+@return MTgDetail
+*/
+
+/**
+@api MGoodsCommentList MGoodsCommentList	//评论列表(需要登录)
+@param required number type //类型1:团购 2:特价 3:分类商品
+@param required string id //id
+@return MGoodsCommentList
+*/
+
+/**
+@api MTgCollectList MTgCollectList	//团购收藏列表(需要登录,分页)
+@return MTgMiniList
+*/

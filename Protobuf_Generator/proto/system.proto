@@ -1,0 +1,67 @@
+package com.udows.stg.proto;
+option java_outer_classname = "MSystem";
+
+message MRet {
+	optional int32 code = 1; //返回类型
+	optional string msg = 2; //返回值
+}
+
+message MFile {
+	required bytes file = 1;
+	optional string name = 2;
+}
+
+message MPunish {
+	optional string id = 1; //id
+	optional string userid = 2; //用户id
+	optional int32 sex = 3; //性别
+	optional int32 age = 4; //年龄
+	optional string location = 5; //地区
+	optional string content = 6; //内容
+	optional string time = 7; //时间(展示)
+	optional string createTime = 8; //时间(分页)
+}
+
+message MPunishList {
+	repeated MPunish list = 1; //列表
+}
+
+message MCity {
+	optional string code = 1; //编号
+	optional string name = 2; //名称
+	optional int32 hot = 3; //热门 0:否 1:是
+}
+
+message MCityList {
+	repeated MCity list = 1; //列表
+}
+
+/**
+@api MUploadFile MUploadFile	//上传文件(需要登录)
+@param required MFile file //文件
+@return MRet
+*/
+
+/**
+@api MPunishList MPunishList	//处罚列表(需要登录,分页)
+@param optional string begin //开始时间
+@return MPunishList
+*/
+
+/**
+@api MFeedback MFeedback	//用户反馈(需要登录)
+@param optional string content //内容
+@return MRet
+*/
+
+/**
+@api MCityList MCityList	//城市列表(需要登录)
+@return MCityList
+*/
+
+/**
+@api MCityMatch MCityMatch	//城市匹配(需要登录)
+@param optional string name //城市名称
+@return MRet
+*/
+

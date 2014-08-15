@@ -1,0 +1,160 @@
+package com.udows.stg.proto;
+option java_outer_classname = "MAppStore";
+
+message MStoreMini {
+	optional string id = 1; //id
+	optional string name = 2; //名称
+	optional string img = 3; //图
+	optional string info = 4; //状态
+	optional string phone = 5; //电话
+	optional string distance = 6; //距离
+	optional string avg = 7; //人均
+}
+
+message MStoreMiniList {
+	repeated MStoreMini list = 1; //列表
+}
+
+message MStoreAct {
+	optional string id = 1; //商家id
+	optional string name = 2; //商家名称
+	optional string title = 3; //标题
+	optional string img = 4; //图
+	optional string url = 5; //webview
+	optional string time = 6; //时间(分页)
+}
+
+message MStoreActList {
+	repeated MStoreAct list = 1; //列表
+}
+
+message MCreditsGoods {
+	optional string id = 1; //id
+	optional string name = 2; //名称
+	optional string info = 3; //描述
+	optional string img = 4; //图
+	optional int32 count = 5; //库存
+	optional int32 credits = 6; //积分
+	optional string storeId = 7; //店铺id
+}
+
+message MCreditsGoodsList {
+	repeated MCreditsGoods list = 1; //列表
+}
+
+message MSysRecommed {
+	optional string id = 1; //id
+	optional string title = 2; //名称
+	optional string img = 3; //图
+	optional string time = 4; //时间
+	optional string url = 5; //webview
+	optional string storeId = 6; //商家id
+	optional string timeQuery = 7; //时间(分页)
+}
+
+message MSysRecommedList {
+	repeated MSysRecommed list = 1; //列表
+}
+
+message MStore{
+	optional string id = 1; //id
+	optional string name = 2; //名称
+	optional string img = 3; //图
+	optional string info = 4; //简介
+	optional string phone = 5; //电话
+	optional string address = 6; //地址
+	optional string lng = 7; //经度
+	optional string lat = 8; //纬度
+	optional string url = 9; //门店介绍webview
+	optional string service = 10; //门店服务
+	optional string openTime = 11; //营业时间
+	optional string newsTitle = 12; //最新动态标题
+	optional string newsImg = 13; //最新动态图
+	optional string newsUrl = 14; //最新动态webview
+	repeated MStoreCate cates = 15; //店内分类
+	repeated MStoreSale sales = 16; //特价
+	repeated MStoreSale tg = 17; //团购
+}
+
+message MStoreSaleList{
+	repeated MStoreSale list = 1; //列表
+}
+
+message MStoreCate{
+	optional string id = 1; //id
+	optional string name = 2; //名称
+	optional string img = 3; //图
+}
+
+message MStoreSale{
+	optional string id = 1; //id
+	optional string name = 2; //名称
+	optional string imgs = 3; //组图
+	optional string oldPrice = 4; //原价
+	optional string nowPrice = 5; //现价
+	optional string salePrice = 6; //抢购价
+	optional string discount = 7; //打折
+	optional string surplus = 8; //剩余秒数
+	optional string standard = 9; //规格
+	optional string count = 10; //库存
+	optional int32 type = 11; //1:一元支付 2:全额支付
+	optional string url = 12; //详情webview
+}
+
+/**
+@api MCityStore MCityStore	//全城商家首页列表(需要登录)
+@param required string cityCode //城市编号
+@return MStoreMiniList
+*/
+
+/**
+@api MStoreList MStoreList	//商家列表(需要登录,分页)
+@param required string areaCode //区域编号(全城则为城市编号)
+@param optional string cateCode //主营编号(new:新单)
+@param required number sortType //排序 1:
+@return MStoreMiniList
+*/
+
+/**
+@api MStoreActList MStoreActList	//商家活动(需要登录,分页)
+@param required string cityCode //城市编号
+@param optional string begin //开始时间
+@return MStoreActList
+*/
+
+/**
+@api MCreditsGoodsList MCreditsGoodsList	//积分商品(需要登录,分页)
+@param required string cityCode //城市编号
+@return MCreditsGoodsList
+*/
+
+/**
+@api MCreditsGoodsExchange MCreditsGoodsExchange	//积分兑换(需要登录)
+@param required string id //商品id
+@return MRet
+*/
+
+/**
+@api MSysRecommedList MSysRecommedList	//特色推荐(需要登录,分页)
+@param required string cityCode //城市编号
+@param optional string begin //开始时间
+@return MSysRecommedList
+*/
+
+/**
+@api MStore MStore	//商家详情(需要登录)
+@param required string id //商家id
+@return MStore
+*/
+
+/**
+@api MStoreCateGoodsList MStoreCateGoodsList	//商家分类商品列表(需要登录,分页)
+@param required string storeId //店铺id
+@param required string cateId //分类id
+@return MStoreSaleList
+*/
+
+/**
+@api MStoreCollectList MStoreCollectList	//商家收藏列表(需要登录,分页)
+@return MStoreMiniList
+*/

@@ -1,0 +1,207 @@
+package com.udows.stg.proto;
+option java_outer_classname = "MAppUser";
+
+message MUser {
+	optional string id = 1; //id
+	optional string nickname = 2; //昵称
+	optional int32 isVerify = 3;  //已认证  0:否 1:是
+	optional int32 sex = 4;  //性别 1:男 0:女
+	optional string headImg = 5; //头像
+	optional string theme = 6; //最近的邀约主题
+	optional string time = 7; //时间
+	optional string distance = 8; //距离(分页用)
+	optional string createTime = 9; //时间(分页用)
+	optional int32 age = 10; //年龄
+}
+
+message MUserList {
+	repeated MUser users = 1; //列表
+}
+
+message MFriend {
+	optional string id = 1; //id
+	optional string nickname = 2; //昵称
+	optional string remark = 3; //备注
+	optional int32 sex = 4;  //性别 1:男 0:女
+	optional string headImg = 5; //头像
+	optional int32 star = 6;  //星标 1:是 0:否
+	optional int32 lookMe = 7;  //不让它看我的朋友圈1:是 0:否
+	optional int32 look = 8;  //不让看它的朋友圈1:是 0:否
+}
+
+message MFriendList {
+	repeated MFriend list = 1; //列表
+}
+
+message MUserDetail {
+	optional string id = 1; //id
+	optional string nickname = 2; //昵称
+	optional int32 isVerify = 3;  //已认证  0:否 1:是 2:待审核
+	optional int32 marriageSeeking = 4;  //征婚 1:是 0:否
+	optional string headImg = 5; //头像
+	optional string location = 6;  //所在地
+	optional int32 sex = 7;  //性别 1:男 0:女
+	optional int32 age = 8;  //年龄
+	optional string voice = 9;  //音频
+	optional int32 voiceTime = 10;  //音频时长
+	repeated string openPhotos = 11;  //公开照片
+	repeated string privatePhotos = 12;  //私密照片
+	optional int32 canInfo = 13;  //是否可查看私密信息1:是 0:否 
+	optional int32 canContact = 14;  //是否可查看联系方式1:是 0:否
+	optional string info = 15;  //自我介绍
+	optional string contact = 16;  //联系方式
+	optional string loveDeclaration = 17;  //爱情宣言
+	optional string emotionState = 18;  //情感状态
+	optional string height = 19;  //身高
+	optional string weight = 20;  //体重
+	optional string job = 21;  //职业
+	optional string income = 22;  //收入
+	optional string vehicle = 23;  //车辆
+	optional string loveOpinion = 24;  //爱情看法
+	optional string sexOpinion = 25;  //性看法
+	optional string privacy = 26;  //隐私设置 00 10 01 11
+	optional string distance = 27;  //距离
+	optional int32 isFocus = 28;  //是否已关注1:是 0:否
+	optional int32 isBlack = 29;  //是否已拉黑1:是 0:否
+}
+
+/**
+@api MUserList MUserList	//同城首页列表(需要登录)
+@param required number sortOrder //排序1:活跃时间 2:距离
+@param optional string sortValue //对应的值
+@param required number sex //性别0:女1:男 2:all
+@param optional string area //地区,模糊查询
+@param required number isVerify //已认证  0:all 1:是 
+@return MUserList
+*/
+
+/**
+@api MUploadVoice MUploadVoice	//上传音频(需要登录)
+@param required MFile file //音频
+@param required int32 seconds //秒数
+@return MRet
+*/
+
+/**
+@api MUploadPhoto MUploadPhoto	//上传照片(需要登录)
+@param required MFile file //文件
+@param required int32 type //0:头像 1:公开 2:私密
+@return MRet
+*/
+
+/**
+@api MDelPhoto MDelPhoto	//删除照片(需要登录)
+@param required string id //图片id
+@param required int32 type //1:公开 2:私密
+@return MRet
+*/
+
+/**
+@api MGetPersonInfo MGetPersonInfo	//个人主页-个人资料(需要登录)
+@return MUserDetail
+*/
+
+/**
+@api MVisitPersonInfo MVisitPersonInfo //访问个人主页-个人资料
+@param required string id //访问对象id
+@return MUserDetail
+*/
+
+/**
+@api MUpdateUserArg MUpdateUserArg	//更新属性(需要登录)
+@param required string code //属性代码(待定)
+@param required string value //值
+@return MRet
+*/
+
+/**
+@api MEditAppArg MEditAppArg	//用户参数设置(需要登录)
+@param required string code //参数代码(待定)
+@param required string value //值
+@return MRet
+*/
+
+/**
+@api MVerifyID MVerifyID	//身份证认证(需要登录)
+@param required string imgs //2张图
+@return MRet
+*/
+
+/**
+@api MEditBlack MEditBlack	//黑名单操作(需要登录)
+@param required string target // 对象id
+@param required number type // 1:添加 2:取消
+@return MRet
+*/
+
+/**
+@api MBlackList MBlackList	//黑名单列表(需要登录)
+@return MUserList
+*/
+
+/**
+@api MEditFocus MEditFocus	//关注操作(需要登录)
+@param required string target // 对象id
+@param required number type // 1:添加 2:取消
+@return MRet
+*/
+
+/**
+@api MAddReport MAddReport	//举报(需要登录)
+@param required string target // 对象id
+@param required string reason // 原因
+@return MRet
+*/
+
+/**
+@api MDateUserList MDateUserList	//我的邀约参与者(需要登录)
+@param required number type //1:邀约 2:征婚
+@param required string id //相关id
+@return MUserList
+*/
+
+/**
+@api MUserVisitor MUserVisitor	//个人主页-最近访客(需要登录,分页)
+@param required string id //用户id
+@param required string begin //开始时间
+@return MUserList
+*/
+
+/**
+@api MFriendList MFriendList	//好友列表(需要登录)
+@param required number type //1:关注的 2:好友
+@return MFriendList
+*/
+
+/**
+@api MEditFriend MEditFriend	//编辑好友(需要登录)
+@param required number type //1:删除 2:备注 3:设为星标 4:不让看朋友圈 5:不看它的朋友圈 6:黑名单
+@param required string id	//对象id
+@param required optional value	//相关值
+@return MRet
+*/
+
+/**
+@api MChangeCredits MChangeCredits  //积分变化(需要登录)
+@param required number type //1:访问联系方式 2:访问隐私资料 
+@param required string id   //对象id
+@return MRet
+*/
+
+/**
+@api MUserFirstLogin MUserFirstLogin  //每天第一次登录(需要登录)
+@return MRet
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+

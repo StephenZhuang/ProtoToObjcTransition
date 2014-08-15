@@ -1,0 +1,5 @@
+#!/bin/bash
+dir=$(cd "$(dirname "$0")"; pwd)
+cd $dir
+cd proto
+/Users/stephenzhuang/soft/ProtocolBuffers-ObjC/src/protoc --objc_out=../iosProto *.proto

@@ -1,0 +1,60 @@
+package com.udows.stg.proto;
+option java_outer_classname = "MBanner";
+
+message MFocus {
+	optional string id = 1; //id
+	optional string img = 2; //图
+	optional int32 type = 3; //类型
+	optional string fid = 4; //对应id
+	optional string url = 5; //webview地址
+}
+
+message MFocusList {
+	repeated MFocus list = 1; //列表
+}
+
+message MCate {
+	optional string id = 1; //id
+	optional string img = 2; //图
+	optional string name = 3; //名称
+	optional int32 isHot = 4; //热门
+	optional int32 count = 5; //数量
+	repeated MCate list = 6; //列表
+}
+
+message MCateList {
+	repeated MCate list = 1; //列表
+}
+
+/**
+@api MTcFocus MTcFocus	//同城邀约焦点图(需要登录)
+@return MFocusList
+*/
+
+/**
+@api MTgFocus MTgFocus	//商家团购焦点图(需要登录)
+@param required number type //1:同城商家2:团购
+@param required string cityCode //城市编号
+@return MFocusList
+*/
+
+/**
+@api MIndexCateList MIndexCateList	//同城商家或团购分类图标(前6个图标,后面2个固定,需要登录)
+@param required string cityCode //城市编号
+@param required number type //1:同城商家 2:同城团购
+@return MCateList
+*/
+
+/**
+@api MCateList MCateList	//同城商家或团购所有分类(需要登录)
+@param required string cityCode //城市编号
+@param required number type //1:同城商家 2:同城团购
+@return MCateList
+*/
+
+/**
+@api MAreaList MAreaList	//地区分类(需要登录)
+@param required string cityCode //城市编号
+@param required number type //1:同城商家 2:同城团购
+@return MCateList
+*/

@@ -1,0 +1,113 @@
+package com.udows.stg.proto;
+option java_outer_classname = "MAppOrder";
+
+message MPay {
+	optional string id = 1; //订单id
+	optional string code = 2; //编号
+	optional int32 payType = 3; //支付类型1:一元支付 2:全额支付
+	optional string name = 4; //商品标题
+	optional string price = 5; //单价
+	optional int32 num = 6; //数量
+	optional string total = 7; //全额支付总价
+	optional string stbTotal = 8; //一元支付搜淘币总价
+	optional string payStoreTotal = 9; //一元支付,到店支付总价
+	optional string stb = 10; //搜淘币余额
+	optional int32 type = 11; //类型1:团购 2:特价 3:分类商品
+}
+
+message MOrderMini {
+	optional string id = 1; //订单id
+	optional int32 payType = 2; //支付类型1:一元支付 2:全额支付
+	optional string goodsId = 3; //商品id
+	optional string name = 4; //商品标题
+	optional string img = 5; //图
+	optional int32 num = 6; //数量
+	optional string total = 7; //总价
+	optional int32 state = 8; //状态0:已过期 1:待付款 2:已付款 3:已消费 4:已评价 5:退款中 6:退款失败 7:退款成功
+	optional int32 type = 9; //类型1:团购 2:特价 3:分类商品
+}
+
+message MOrderMiniList {
+	repeated MOrderMini list = 1; //列表
+}
+
+message MOrder {
+	optional string id = 1; //订单id
+	optional string code = 2; //订单编号
+	optional int32 state = 3; //状态0:已过期 1:待付款 2:已付款 3:已消费 4:已评价 5:退款中 6:退款失败 7:退款成功
+	optional int32 payType = 4; //支付类型1:一元支付 2:全额支付
+	optional int32 type = 5; //类型1:团购 2:特价 3:分类商品
+	optional string goodsId = 6; //商品id
+	optional string name = 7; //商品标题(商品表)
+	optional string info = 8; //商品描述(商品表)
+	optional string price = 9; //单价(商品表)
+	optional string img = 10; //图(商品表)
+	optional int32 num = 11; //数量
+	optional string commentId = 12; //评论id(以评论的)
+	optional string commentStars = 13; //评论分数(以评论的)
+	optional string deadline = 14; //搜淘卷到期
+	repeated string tickets = 15; //搜淘卷
+	optional string combo = 16; //套餐
+	optional string detailUrl = 17; //图文详情webview
+	optional string payTime = 18; //付款时间
+	optional string payTotal = 19; //全额支付总额
+	optional string stbTotal = 20; //一元支付搜淘币总额
+	optional string storeTotal = 21; //一元支付到店支付
+}
+
+/**
+@api MAddOrder MAddOrder	//提交订单(需要登录)
+@param required number type //类型1:团购 2:特价 3:分类商品
+@param required string id //商品id
+@param required string title //商品标题
+@param required number payType //支付类型1:一元支付 2:全额支付
+@param required number num //数量
+@param required string price //单价
+@param optional string stb //搜淘币
+@param optional string backPrice //返利
+@param optional string payStore //到店支付
+@param required string credits //反积分
+@return MPay
+*/
+
+/**
+@api MToPay MToPay	//去支付(需要登录)
+@param required string id //订单id
+@return MPay
+*/
+
+/**
+@api MPayByStb MPayByStb	//搜淘币支付(需要登录)
+@param required string id //订单id
+@return MRet
+*/
+
+/**
+@api MAddStbOrder MAddStbOrder	//提交搜淘币充值订单(需要登录)
+@param required number num //数量
+@return MRet
+*/
+
+/**
+@api MOrderList MOrderList	//订单列表(需要登录,分页)
+@param required number type //1:未付款 2:已付款
+@return MOrderMiniList
+*/
+
+/**
+@api MOrder MOrder	//订单详情(需要登录)
+@param required string id //订单id
+@return MOrder
+*/
+
+/**
+@api MOrderRefund MOrderRefund	//申请退款(需要登录,全额支付且已付款未消费才可退款)
+@param required string id //订单id
+@return MRet
+*/
+
+/**
+@api MOrderDel MOrderDel	//删除订单(需要登录)
+@param required string ids //订单ids
+@return MRet
+*/

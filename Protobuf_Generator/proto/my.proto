@@ -1,0 +1,33 @@
+package com.udows.stg.proto;
+option java_outer_classname = "MMy";
+
+message MCreditsLog {
+	optional string id = 1; //id
+	optional int32 type = 2; //1:收入 2:支出
+	optional string item = 3; //项目
+	optional string info = 4; //描述
+	optional string num = 5; //数量
+	optional string time = 6; //时间
+}
+
+message MCreditsLogList {
+	repeated MCreditsLog list = 1; //列表
+}
+
+/**
+@api MEditCollect MEditCollect	//编辑收藏(需要登录)
+@param required number type //1:团购 2:商家
+@param required string id //id
+@param required number op //1:添加 2:删除
+@return MRet
+*/
+
+/**
+@api MCreditsLog MCreditsLog	//积分日志(需要登录)
+@return MCreditsLogList
+*/
+
+/**
+@api MStbLog MStbLog	//搜淘币日志(需要登录)
+@return MCreditsLogList
+*/

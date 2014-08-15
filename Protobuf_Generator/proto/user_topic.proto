@@ -1,0 +1,89 @@
+package com.udows.stg.proto;
+option java_outer_classname = "MUserTopic";
+
+message MTopic {
+	optional string id = 1; //id
+	optional string userid = 2; //用户id
+	optional string headImg = 3; //头像
+	optional string content = 4; //内容
+	repeated string imgs = 5; //图集
+	optional string location = 6; //内容
+	optional int32 praiseCnt = 7; //赞总数
+	optional int32 commentCnt = 8; //评论总数
+	optional string time = 9; //时间(展示)
+	optional string createTime = 10; //时间(分页)
+	repeated MComment comments = 11; //评论列表(需要分页)
+	repeated MPraise praises = 12; //赞列表
+	optional int32 hasPraise = 13; //是否已经赞0:否1:是
+}
+
+message MTopicList {
+	repeated MTopic list = 1; //列表
+}
+
+message MPraise {
+	optional string id = 1; //id
+	optional string userid = 2; //用户id
+	optional string headImg = 3; //头像
+}
+
+message MComment {
+	optional string id = 1; //id
+	optional string userid = 2; //用户id
+	optional string headImg = 3; //头像
+	optional string nickname = 4; //用户昵称
+	optional string targetId = 5; //对象id
+	optional string targetNickname = 6; //对象昵称
+	optional string content = 7; //内容
+	optional string time = 8; //时间(展示)
+	optional string createTime = 9; //时间(分页)
+}
+
+message MCommentList {
+	repeated MComment comments = 1; //评论列表
+}
+
+/**
+@api MAddTopic MAddTopic	//发布说说(需要登录)
+@param required string content //内容
+@param optional string imgs //图集
+@param optional string location //地点
+@return MRet
+*/
+
+/**
+@api MTopicList MTopicList	//朋友圈(需要登录,分页)
+@param optional string begin //开始时间
+@return MTopicList
+*/
+
+/**
+@api MTopicPraise MTopicPraise	//朋友圈赞(需要登录)
+@param required string id //说说id
+@return MRet
+*/
+
+/**
+@api MTopicDel MTopicDel	//朋友圈删除(需要登录)
+@param required string id //说说id
+@return MRet
+*/
+
+/**
+@api MTopic MTopic	//朋友圈详情(需要登录)
+@param required string id //说说id
+@return MTopic
+*/
+
+/**
+@api MTopicComment MTopicComment	//朋友圈评论(需要登录,分页)
+@param optional string begin //开始时间
+@return MCommentList
+*/
+
+/**
+@api MUserTopicList MUserTopicList	//用户朋友圈(需要登录,分页)
+@param required string id //用户id
+@param optional string begin //开始时间
+@return MTopicList
+*/

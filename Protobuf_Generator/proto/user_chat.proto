@@ -1,0 +1,118 @@
+package com.udows.stg.proto;
+option java_outer_classname = "MAppChat";
+
+message MChat {
+	optional int32 type = 1; //类型 1:邀约2:征婚 3:聊天
+	optional string title = 2; //主题
+	optional int32 state = 3; //状态 0:等待 1:在考虑 2:同意 3:拒绝
+	optional string status = 4; //状态文字
+	optional string targetId = 5; //对象id
+	optional string targetImg = 6; //对象头像
+	optional string fid = 7; //邀约征婚id
+	optional int32 friend = 8; //是否好友(聊天时)
+	repeated MMsg msg = 9; //消息列表
+	optional string viewId = 10; //会话id
+}
+
+message MMsg {
+	optional string id = 1; //id
+	optional string userid = 2; //用户id
+	optional int32 type = 3; //1:文本 2:图片 3:语音 4:通知
+	optional string content = 4; //内容
+	optional string time = 5; //时间(短)
+	optional string createTime = 6; //时间(长)
+	optional string arg = 7; //语音时长,图片长宽
+}
+
+message MChatView {
+	optional int32 type = 1; //类型 1:邀约2:征婚 3:聊天
+	optional string title = 2; //主题
+	optional int32 state = 3; //状态 0:等待 1:在考虑 2:同意 3:拒绝
+	optional string targetId = 4; //对象id
+	optional string targetImg = 5; //对象头像
+	optional string targetNickname = 6; //对象昵称
+	optional string id = 7; //会话id
+	optional string time = 8; //时间
+	optional string msg = 9; //最近消息
+	optional string msgCnt = 10; //未读消息数
+}
+
+message MChatViewList {
+	repeated MChatView views = 1; //会话列表
+}
+
+message MNotify {
+	optional string id = 1; //id
+	optional int32 type = 2; //1:无跳转
+	optional string img = 3; //图
+	optional string content = 4; //内容
+	optional string createTime = 6; //时间(长)
+}
+
+message MNotifyList {
+	optional MNotify notify = 1; //列表
+}
+
+/**
+@api MAddChatPage MAddChatPage	//首次进入聊天(需要登录)
+@param required number type //1:邀约2:征婚 3:聊天
+@param required string targetId //对象id
+@param optional string fid //邀约征婚id
+@return MChat
+*/
+
+/**
+@api MChatPage MChatPage	//进入聊天(需要登录)
+@param required string viewId //会话id
+@param optional string begin //开始时间
+@return MChat
+*/
+
+/**
+@api MChatMsg MChatMsg	// 查询单条记录(需要登录)
+@param required string id //信息id
+@return MMsg
+*/
+
+/**
+@api MAddMsg MAddMsg	// 添加聊天(需要登录)
+@param required string viewId //会话id
+@param optional number type //1:文本 2:图片 3:语音
+@param optional number seconds //语音长度
+@return MMsg
+*/
+
+/**
+@api MUpdateDateState MUpdateDateState	// 更新活动状态(需要登录)
+@param required string viewId //会话id
+@param required number state //1:在考虑 2:同意 3:拒绝
+@return MRet
+*/
+
+/**
+@api MChatView MChatView	// 会话列表(需要登录)
+@return MChatViewList
+*/
+
+/**
+@api MDelChatView MDelChatView	// 删除会话(需要登录)
+@param required string viewIds //会话ids,逗号隔开
+@return MRet
+*/
+
+/**
+@api MMarkRead MMarkRead	// 所有标记已读(需要登录)
+@return MRet
+*/
+
+/**
+@api MSysNotifyList MSysNotifyList	// 系统消息(需要登录,分页)
+@param required string begin //开始时间
+@return MNotifyList
+*/
+
+/**
+@api MDelSysNotify MDelSysNotify	// 删除系统消息(需要登录)
+@param optional string id //有:删除单个 无:删除全部
+@return MRet
+*/
